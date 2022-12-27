@@ -1,4 +1,4 @@
-﻿namespace MagmaTestServer
+﻿namespace MagmaTestServer.Classes
 {
     public class scan
     {
