@@ -14,7 +14,7 @@ namespace MagmaTestServer.Controllers
         {
             JArray files = JArray.FromObject(StaticFileReader.ReadTheJsonFile().GetValue("files"));
 
-            return String.Join(", ",(from p in files where ((bool)p["result"] == correct) select p));
+            return String.Join(", ",(from p in files where ((bool)p["result"] == correct) select p["filename"]));
 
         }
     }
