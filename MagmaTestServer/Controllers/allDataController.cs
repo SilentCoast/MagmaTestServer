@@ -16,6 +16,6 @@ namespace MagmaTestServer.Controllers
             return StaticFileReader.ReadTheJsonFile().ToString();
         }
 
-        
+
     }
 }

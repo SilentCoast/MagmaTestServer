@@ -11,7 +11,7 @@ namespace MagmaTestServer.Controllers
         [HttpGet]
         public string Get()
         {
-            return ((StaticFileReader.ReadTheJsonFile().GetValue("scan"))??"NULL").ToString();
+            return (StaticFileReader.ReadTheJsonFile().GetValue("scan") ?? "ERROR").ToString();
         }
     }
 }
