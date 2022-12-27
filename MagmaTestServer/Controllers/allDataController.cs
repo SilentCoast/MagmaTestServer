@@ -13,12 +13,7 @@ namespace MagmaTestServer.Controllers
         [HttpGet]
         public string Get()
         {
-            using (StreamReader file = System.IO.File.OpenText("data.json"))
-            using(JsonTextReader reader = new JsonTextReader(file))
-            {
-                return ((JObject)JToken.ReadFrom(reader)).ToString();
-            }
-               
+            return StaticFileReader.ReadTheJsonFile().ToString();
         }
 
         

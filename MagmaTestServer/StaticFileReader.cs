@@ -5,6 +5,7 @@ namespace MagmaTestServer
 {
     public static class StaticFileReader
     {
+
         public static JObject ReadTheJsonFile()
         {
             using (StreamReader file = System.IO.File.OpenText("data.json"))
