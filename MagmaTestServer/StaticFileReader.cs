@@ -13,7 +13,7 @@ namespace MagmaTestServer
                 using (StreamReader file = System.IO.File.OpenText("data.json"))
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
-                    return (JObject)JToken.ReadFrom(reader);
+                    return (JObject) JToken.ReadFrom(reader);
                 }
             }
             catch

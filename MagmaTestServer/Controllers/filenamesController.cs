@@ -7,7 +7,7 @@ namespace MagmaTestServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class filenames : ControllerBase
+    public class filenamesController : ControllerBase
     {
         [HttpGet]
         public string Get([FromQuery] bool correct)
