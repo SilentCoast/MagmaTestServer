@@ -34,10 +34,10 @@ namespace MagmaTestServer.Controllers
         public files GetError([FromRoute] int index)
         {
             //TODO: simplify
-            var jstring = StaticFileReader.ReadTheJsonFile()
+            var jsonList = StaticFileReader.ReadTheJsonFile()
                 .GetValue("files").Where(p => (bool)p["result"] == false).ToList();
             //JArray newjsonString = (JArray)(((JObject)(JToken.ReadFrom(reader))).GetValue("files"));
-            List<files> filesJson = JsonConvert.DeserializeObject<List<files>>("[" + String.Join(",", jstring) + "]");
+            List<files> filesJson = JsonConvert.DeserializeObject<List<files>>("[" + String.Join(",", jsonList) + "]");
 
             if (index >= 0 && index < filesJson.Count)
             {
