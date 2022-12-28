@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 
@@ -10,11 +11,17 @@ namespace MagmaTestServer.Controllers
     public class filenamesController : ControllerBase
     {
         [HttpGet]
-        public string Get([FromQuery] bool correct)
+        public IEnumerable<string> Get([FromQuery] bool correct)
         {
-            JArray files = JArray.FromObject(StaticFileReader.ReadTheJsonFile().GetValue("files"));
+            using (StreamReader file = System.IO.File.OpenText("data.json"))
+            using (JsonTextReader reader = new JsonTextReader(file))
+            {
+                var filesff= JToken.ReadFrom(reader)["files"];
 
-            return String.Join(", ",(from p in files where ((bool)p["result"] == correct) select p["filename"]));
+                //JArray files = JArray.FromObject(StaticFileReader.ReadTheJsonFile().GetValue("files"));
+
+                return filesff.Where(p => (bool)p["result"]==correct).Select(p => p["filename"].ToString());
+            }
 
         }
     }
