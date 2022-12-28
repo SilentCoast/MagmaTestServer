@@ -1,14 +1,14 @@
 ﻿namespace MagmaTestServer.Classes
 {
-    public class files
+    public class Files
     {
-        public files() { }
+        public Files() { }
         public string? filename { get; set; }
-        public errors[]? errors { get; set; }  
+        public Errors[]? errors { get; set; }  
     }
-    public class errors
+    public class Errors
     {
-        public errors() { }
+        public Errors() { }
         public string? error { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace MagmaTestServer.Controllers
             var trueResult = jsonList.Where(p => (bool)p["result"] == true).ToList();
             var totalResult = jsonList.ToList();
 
-            //List<files> filesJson = JsonConvert.DeserializeObject<List<files>>("[" + String.Join(",", jsonList) + "]");
+            //List<Files> filesJson = JsonConvert.DeserializeObject<List<Files>>("[" + String.Join(",", jsonList) + "]");
             querychek.total = totalResult.Count;
             querychek.correct = trueResult.Count;
             querychek.errors = falseResult.Count;
