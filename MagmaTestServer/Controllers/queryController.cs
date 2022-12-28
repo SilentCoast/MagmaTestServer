@@ -15,21 +15,22 @@ namespace MagmaTestServer.Controllers
         [Route("check")]
         public Querychek GetFilesQuery()
         {
-            Querychek querychek = new Querychek();
+            
             var jsonList = StaticFileReader.ReadTheJsonFile()["files"];
 
-            var falseResult = jsonList.Where(p => (bool)p["result"] == false).ToList();
-            var trueResult = jsonList.Where(p => (bool)p["result"] == true).ToList();
-            var totalResult = jsonList.ToList();
+            var totalResult = jsonList.Where(p => p["filename"].ToString().ToLower().StartsWith("query_")).ToList();
 
-            //List<Files> filesJson = JsonConvert.DeserializeObject<List<Files>>("[" + String.Join(",", jsonList) + "]");
+            var falseResult = totalResult.Where(p => (bool)p["result"] == false).ToList();
+            var trueResult =  totalResult.Where(p => (bool)p["result"] == true).ToList();
+
+
+            Querychek querychek = new Querychek();
             querychek.total = totalResult.Count;
             querychek.correct = trueResult.Count;
             querychek.errors = falseResult.Count;
-            if (querychek.errors > 1)
+            if (querychek.errors > 0)
             {
-                querychek.filenames = jsonList.Where(p => (bool)p["result"] == false)
-                                              .Select(p => (string)p["filename"]).ToArray();
+                querychek.filenames = falseResult.Select(p => (string)p["filename"]).ToArray();
             }
             return querychek;
         }
