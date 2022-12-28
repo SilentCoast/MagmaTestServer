@@ -15,8 +15,8 @@ namespace MagmaTestServer.Controllers
         public List<files> GetErrors()
         {
             //TODO: null check
-            var jstring = StaticFileReader.ReadTheJsonFile()
-                .GetValue("files").Where(p => (bool)p["result"] == false).ToList();
+            var jstring = StaticFileReader.ReadTheJsonFile()["files"]
+                .Where(p => (bool)p["result"] == false).ToList();
             //JArray newjsonString = (JArray)(((JObject)(JToken.ReadFrom(reader))).GetValue("files"));
             List<files> filesJson = JsonConvert.DeserializeObject<List<files>>("[" + String.Join(",",jstring) + "]");
 
@@ -28,14 +28,14 @@ namespace MagmaTestServer.Controllers
         [Route("count")]
         public int GetCount()
         {
-            return (int)StaticFileReader.ReadTheJsonFile().GetValue("scan")["errorCount"];
+            return (int)StaticFileReader.ReadTheJsonFile()["scan"]["errorCount"];
         }
         [HttpGet("{index}")]
         public files GetError([FromRoute] int index)
         {
             //TODO: simplify
             var jsonList = StaticFileReader.ReadTheJsonFile()
-                .GetValue("files").Where(p => (bool)p["result"] == false).ToList();
+                ["files"].Where(p => (bool)p["result"] == false).ToList();
             //JArray newjsonString = (JArray)(((JObject)(JToken.ReadFrom(reader))).GetValue("files"));
             List<files> filesJson = JsonConvert.DeserializeObject<List<files>>("[" + String.Join(",", jsonList) + "]");
 

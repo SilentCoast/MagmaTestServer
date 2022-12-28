@@ -16,7 +16,7 @@ namespace MagmaTestServer.Controllers
         public Querychek GetFilesQuery()
         {
             Querychek querychek = new Querychek();
-            var jsonList = StaticFileReader.ReadTheJsonFile().GetValue("files");
+            var jsonList = StaticFileReader.ReadTheJsonFile()["files"];
 
             var falseResult = jsonList.Where(p => (bool)p["result"] == false).ToList();
             var trueResult = jsonList.Where(p => (bool)p["result"] == true).ToList();

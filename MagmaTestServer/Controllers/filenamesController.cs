@@ -11,17 +11,17 @@ namespace MagmaTestServer.Controllers
     public class filenamesController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<string> Get([FromQuery] bool correct)
+        public string Get([FromQuery] bool correct)
         {
-            using (StreamReader file = System.IO.File.OpenText("data.json"))
-            using (JsonTextReader reader = new JsonTextReader(file))
-            {
-                var filesff= JToken.ReadFrom(reader)["files"];
+            
+            var filesff = StaticFileReader.ReadTheJsonFile()["files"];
+            if(filesff == null) { return "ERROR"; }
 
-                //JArray files = JArray.FromObject(StaticFileReader.ReadTheJsonFile().GetValue("files"));
+            IEnumerable<string> results = filesff.Where(p => (bool)p["result"] == correct).Select(p => p["filename"].ToString());
 
-                return filesff.Where(p => (bool)p["result"]==correct).Select(p => p["filename"].ToString());
-            }
+            JObject job = new JObject();
+            job.Add("filenames", JToken.FromObject(results));
+            return job.ToString();
 
         }
     }
